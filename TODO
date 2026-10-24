@@ -1,0 +1,10 @@
+# asciiunits-ts completion checklist (suleman-uzair)
+
+1. Runtime load: parsanol npm runtime over artifacts/unitsml.json (+ tables/),
+   checksum verified against artifacts/unitsml.checksums.txt.
+2. parse(input): expression entry, native-first with the pure-JS fallback.
+3. Corpus replay: npm run replay against asciiunits-testsuite — 143/143 kinds.
+4. Model adapter: captures -> a typed AsciiUnits model (Unit/Prefix/Number/
+   Extender/Fenced/Sqrt), mirroring unitsml-ruby's Unitsml::Parg::TreeMapper.
+5. npm publish as @unitsml/asciiunits-ts (trusted publishing via OIDC,
+   mirroring @unitsml/unitsdb).

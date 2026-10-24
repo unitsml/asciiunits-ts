@@ -1,0 +1,32 @@
+= asciiunits-ts
+
+TypeScript runtime for the asciiunits PARG artifact
+(https://github.com/unitsml/asciiunits[unitsml/asciiunits]): parse UnitsML
+AsciiUnits unit expressions (`mm*s^-2`, `sqrt(Hz)`, `dB`, …) in Node and
+browsers.
+
+Status: **scaffold** — owned by @suleman-uzair; see TODO and the open
+issues for the completion checklist.
+
+== Contract
+
+* `artifacts/unitsml.json` — the checksummed `parsanol-tree/v2` artifact
+  (vendored from unitsml/asciiunits releases; CI pins the checksum)
+* `tables/` — terminal vocabularies resolved at load time
+* entry point: `expression`
+* captures: `unit`, `prefix`, `dimension`, `integer`, `power_numerator`,
+  `extender`, `sqrt`, `int_exp`, `sequence`, `first_set`/`second_set` …
+
+Conformance gate: replay https://github.com/unitsml/asciiunits-testsuite[asciiunits-testsuite]
+(143 oracle-frozen cases) — kinds and tree shapes must match the Ruby
+runtime.
+
+== Development
+
+[source,sh]
+----
+npm install
+npm run build
+npm test
+npm run replay   # corpus replay (needs the testsuite checkout)
+----
