@@ -1,7 +1,6 @@
 {
   "name": "@unitsml/asciiunits-ts",
   "version": "0.1.0",
-  "private": true,
   "description": "TypeScript runtime for the asciiunits PARG artifact: load the checksummed grammar artifact and parse UnitsML AsciiUnits expressions",
   "type": "module",
   "main": "dist/index.js",
@@ -23,5 +22,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/unitsml/asciiunits-ts"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "artifacts"
+  ]
 }
