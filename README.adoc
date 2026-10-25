@@ -5,15 +5,16 @@ TypeScript runtime for the asciiunits PARG artifact
 AsciiUnits unit expressions (`mm*s^-2`, `sqrt(Hz)`, `dB`, …) in Node and
 browsers.
 
-Status: **scaffold** — owned by @suleman-uzair; see TODO and the open
-issues for the completion checklist.
+Status: **complete** — the artifact loads through the parsanol npm
+runtime (checksum-verified), and the
+https://github.com/unitsml/asciiunits-testsuite[conformance corpus]
+replays 143/143 with tree equality (`npm run replay`).
 
 == Contract
 
 * `artifacts/unitsml.json` — the checksummed `parsanol-tree/v2` artifact
   (vendored from unitsml/asciiunits releases; CI pins the checksum)
-* `tables/` — terminal vocabularies resolved at load time
-* entry point: `expression`
+* entry point: `expression` (terminal tables are embedded in the artifact)
 * captures: `unit`, `prefix`, `dimension`, `integer`, `power_numerator`,
   `extender`, `sqrt`, `int_exp`, `sequence`, `first_set`/`second_set` …
 
