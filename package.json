@@ -1,5 +1,5 @@
 {
-  "name": "@unitsml/asciiunits-ts",
+  "name": "@unitsml/asciiunits",
   "version": "0.1.0",
   "description": "TypeScript runtime for the asciiunits PARG artifact: load the checksummed grammar artifact and parse UnitsML AsciiUnits expressions",
   "type": "module",
