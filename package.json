@@ -9,7 +9,7 @@
     "build": "tsc -p tsconfig.json",
     "prepare": "npm run build",
     "test": "node --test",
-    "replay": "node scripts/replay-corpus.mjs"
+    "replay": "node scripts/replay-corpus.ts"
   },
   "dependencies": {
     "parsanol": "^0.10.13"
@@ -29,5 +29,14 @@
   "files": [
     "dist",
     "artifacts"
-  ]
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  }
 }
