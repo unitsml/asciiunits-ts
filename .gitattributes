@@ -1,0 +1,3 @@
+# The grammar artifact is checksummed byte-for-byte (artifacts/unitsml.checksums.txt):
+# never let a checkout rewrite its line endings (core.autocrlf on Windows).
+artifacts/** -text

@@ -23,3 +23,6 @@ jobs:
       - run: npm run replay
         env:
           CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml
+      - run: npm run smoke:package
+        env:
+          CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml

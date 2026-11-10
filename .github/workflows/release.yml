@@ -43,8 +43,18 @@ jobs:
           npm install
           npm run build
 
+      - uses: actions/checkout@v6
+        with:
+          repository: unitsml/asciiunits-testsuite
+          path: asciiunits-testsuite
+
       - name: Test
         run: npm test
+
+      - name: Replay the conformance corpus
+        run: npm run replay
+        env:
+          CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml
 
       - name: Set package version
         run: |
@@ -52,6 +62,11 @@ jobs:
           if [ "$VERSION" != "$(node -p "require('./package.json').version")" ]; then
             npm version "$VERSION" --no-git-tag-version
           fi
+
+      - name: Qualify the packed package
+        run: npm run smoke:package
+        env:
+          CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml
 
       - name: Publish to npm with provenance
         run: npm publish --access public

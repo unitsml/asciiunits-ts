@@ -2,19 +2,35 @@
 // every case must match the oracle kind (accept/reject) and, for
 // accepts, the frozen parsanol capture tree.
 //
-// Usage: node scripts/replay-corpus.mjs [--corpus <dir>]
+// Usage: node scripts/replay-corpus.ts [--corpus <dir>] [--module <dir>]
 //   CORPUS_DIR (or --corpus) points at asciiunits-testsuite/corpora/unitsml.
+//   ASCIIUNITS_PACKAGE (or --module) replays an installed asciiunits
+//   package directory instead of this checkout's dist/ (the packed-package
+//   smoke uses it). The corpus must have been generated for the artifact
+//   being replayed: its artifact_checksum must equal the artifact envelope
+//   checksum in the package's artifacts/unitsml.checksums.txt.
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { parseShape, artifactTestFailures } from "../dist/index.js";
+import { join, dirname } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-function argCorpusDir() {
-  const flag = process.argv.indexOf("--corpus");
-  if (flag !== -1 && process.argv[flag + 1]) return process.argv[flag + 1];
-  return process.env.CORPUS_DIR ?? "../asciiunits-testsuite/corpora/unitsml";
+function argValue(flag, fallback) {
+  const index = process.argv.indexOf(flag);
+  if (index !== -1 && process.argv[index + 1]) return process.argv[index + 1];
+  return fallback;
 }
 
-const corpusDir = argCorpusDir();
+const packageRoot = argValue(
+  "--module",
+  process.env.ASCIIUNITS_PACKAGE ?? join(dirname(fileURLToPath(import.meta.url)), ".."),
+);
+const { parseShape, artifactTestFailures } = await import(
+  pathToFileURL(join(packageRoot, "dist", "index.js")).href
+);
+
+const corpusDir = argValue(
+  "--corpus",
+  process.env.CORPUS_DIR ?? "../asciiunits-testsuite/corpora/unitsml",
+);
 const kinds = JSON.parse(
   readFileSync(join(corpusDir, "expected-kinds.json"), "utf8"),
 );
@@ -24,6 +40,26 @@ const treesByInput = new Map(
     .filter((c) => c.parsanol_tree)
     .map((c) => [c.input, c.parsanol_tree]),
 );
+
+// The corpus pins the artifact it was generated from.
+const envelope = readFileSync(join(packageRoot, "artifacts", "unitsml.checksums.txt"), "utf8")
+  .split(/\r?\n/)
+  .map((line) => line.trim().split(/\s+/))
+  .find(([key]) => key === "artifact_checksum")?.[1];
+if (corpus.artifact_checksum !== envelope) {
+  console.error(
+    `corpus artifact_checksum ${corpus.artifact_checksum} does not match the replayed artifact ${envelope}`,
+  );
+  process.exit(1);
+}
+
+// expected-kinds.json and corpus.json must describe the same cases.
+const corpusKinds = JSON.stringify(corpus.cases.map((c) => [c.kind, c.input]));
+const listedKinds = JSON.stringify(kinds.cases.map((c) => [c.kind, c.input]));
+if (corpusKinds !== listedKinds) {
+  console.error("expected-kinds.json and corpus.json disagree on cases or kinds");
+  process.exit(1);
+}
 
 const failures = await artifactTestFailures();
 if (failures.length > 0) {
@@ -52,7 +88,7 @@ for (const { input, kind } of kinds.cases) {
   passed += 1;
 }
 
-console.log(`${passed}/${kinds.cases.length} corpus cases pass`);
+console.log(`${passed}/${kinds.cases.length} corpus cases pass (artifact ${envelope})`);
 if (bad.length > 0) {
   for (const line of bad) console.error("FAIL", line);
   process.exit(1);
