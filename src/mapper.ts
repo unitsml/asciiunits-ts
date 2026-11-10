@@ -28,7 +28,7 @@ export function mapTree(tree: AsciiUnitsTree): ModelNode | PlainTree {
 // mapper strips them in its normalize pass, and so does this one. With
 // them removed the edition-2 tree is the edition-1 tree, case for case
 // over the 143-case corpus.
-export const EDITION2_STRUCTURAL_NAMES: ReadonlySet<string> = new Set([
+const EDITION2_STRUCTURAL_NAMES: ReadonlySet<string> = new Set([
   "end_guard",
   "lparen",
   "rparen",
