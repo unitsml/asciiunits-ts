@@ -13,7 +13,7 @@
     "smoke:package": "node scripts/smoke-package.mjs"
   },
   "dependencies": {
-    "parsanol": "^0.10.13"
+    "parsanol": "github:suleman-uzair/parsanol-ts#7b6e07b41c21bc85d1366317d91d29a0eee4cfef"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -33,9 +33,18 @@
   ],
   "exports": {
     ".": {
+      "browser": {
+        "types": "./dist/browser.d.ts",
+        "default": "./dist/browser.js"
+      },
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./browser": {
+      "types": "./dist/browser.d.ts",
+      "default": "./dist/browser.js"
+    },
+    "./artifacts/unitsml.json": "./artifacts/unitsml.json"
   },
   "engines": {
     "node": ">=24"

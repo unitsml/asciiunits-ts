@@ -7,6 +7,7 @@ export {
   artifactChecksum,
   artifactTestFailures,
   ArtifactChecksumError,
+  ArtifactLoadError,
 } from "./artifact.js";
 export type { AsciiUnitsTree } from "./artifact.js";
 export { mapTree } from "./mapper.js";

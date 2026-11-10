@@ -7,21 +7,14 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export class ArtifactChecksumError extends Error {
-  constructor(expected: string, actual: string) {
-    super(
-      `asciiunits artifact checksum mismatch: expected ${expected}, got ${actual}`,
-    );
-    this.name = "ArtifactChecksumError";
-  }
-}
+import {
+  ArtifactChecksumError,
+  bindParser,
+  type AsciiUnitsTree,
+} from "./core.js";
 
-export interface AsciiUnitsTree {
-  // Capture-named tree: unit/prefix/dimension/integer/power_numerator/
-  // extender/sqrt/int_exp/sequence/first_set/second_set — see
-  // asciiunits README "Artifact tree contract".
-  [capture: string]: unknown;
-}
+export { ArtifactChecksumError, ArtifactLoadError } from "./core.js";
+export type { AsciiUnitsTree } from "./core.js";
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ARTIFACT_PATH = join(PACKAGE_ROOT, "artifacts", "unitsml.json");
@@ -54,19 +47,12 @@ async function runtime(): Promise<PargRuntime> {
   return runtimePromise;
 }
 
+const parser = bindParser(runtime);
+
 /** The raw parsanol-shape capture tree, or null when the input is rejected. */
-export async function parseShape(
-  input: string,
-): Promise<AsciiUnitsTree | null> {
-  const rt = await runtime();
-  try {
-    return rt.parseShape(input) as AsciiUnitsTree;
-  } catch {
-    return null;
-  }
-}
+export const parseShape: (input: string) => Promise<AsciiUnitsTree | null> =
+  parser.parseShape;
 
 /** Embedded artifact tests; empty list means green. */
-export async function artifactTestFailures(): Promise<string[]> {
-  return (await runtime()).runTests();
-}
+export const artifactTestFailures: () => Promise<string[]> =
+  parser.artifactTestFailures;
