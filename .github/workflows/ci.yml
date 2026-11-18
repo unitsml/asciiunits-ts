@@ -12,9 +12,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
-          repository: suleman-uzair/asciiunits-testsuite
+          repository: unitsml/asciiunits-testsuite
           # Match the compiled grammar artifact; reject mismatched corpus seals.
-          ref: 3134bd30753b709bd638c123963fec48a9416deb
+          ref: 3f835ba8ea441de0c1081a4cd6a53ed52959f32c
           path: asciiunits-testsuite
       - uses: actions/setup-node@v4
         with:

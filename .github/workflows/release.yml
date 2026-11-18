@@ -46,6 +46,8 @@ jobs:
       - uses: actions/checkout@v6
         with:
           repository: unitsml/asciiunits-testsuite
+          # Same pinned corpus as ci.yml; its artifact_checksum must match ours.
+          ref: 3f835ba8ea441de0c1081a4cd6a53ed52959f32c
           path: asciiunits-testsuite
 
       - name: Test
