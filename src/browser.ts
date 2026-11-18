@@ -23,6 +23,7 @@ export {
 } from "./core.js";
 export { mapTree } from "./mapper.js";
 export * from "./model.js";
+export * from "./typed.js";
 export { ARTIFACT_ENVELOPE_CHECKSUM, ARTIFACT_FILE_SHA256 } from "./pin.js";
 
 type Bytes = ArrayBuffer | Uint8Array;
@@ -157,6 +158,10 @@ export async function parse(
   input: string,
 ): Promise<ModelNode | Record<string, unknown> | null> {
   return shared.parse(input);
+}
+
+export async function parseModel(input: string) {
+  return shared.parseModel(input);
 }
 
 export async function tryParse(

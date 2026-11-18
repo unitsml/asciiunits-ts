@@ -2,6 +2,7 @@
 // browser entry (browser.ts). Nothing here may import a Node builtin.
 import { mapTree } from "./mapper.js";
 import type { ModelNode } from "./model.js";
+import { treeToModel, type AsciiunitsModelDocument } from "./typed.js";
 
 /** The artifact bytes do not match the pinned producer checksum. */
 export class ArtifactChecksumError extends Error {
@@ -40,6 +41,8 @@ export interface AsciiUnitsParser {
   /** Parse to the typed model; null on reject. */
   parse(input: string): Promise<ModelNode | Record<string, unknown> | null>;
   tryParse(input: string): Promise<ReturnType<typeof mapTree> | null>;
+  /** Parse to the generated LutaML Document (pinned LML bundle); null on reject. */
+  parseModel(input: string): Promise<AsciiunitsModelDocument | null>;
   /** Embedded artifact tests; empty list means green. */
   artifactTestFailures(): Promise<string[]>;
 }
@@ -78,6 +81,10 @@ export function bindParser(
     parseShape,
     parse,
     tryParse: parse,
+    parseModel: async (input: string) => {
+      const shape = await parseShape(input);
+      return shape === null ? null : treeToModel(shape);
+    },
     artifactTestFailures: async () => (await runtime()).runTests(),
   };
 }
