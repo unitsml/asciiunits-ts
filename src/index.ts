@@ -4,6 +4,7 @@ import type { ModelNode } from "./model.js";
 
 export {
   parseShape,
+  parseModel,
   artifactChecksum,
   artifactTestFailures,
   ArtifactChecksumError,
@@ -12,6 +13,7 @@ export {
 export type { AsciiUnitsTree } from "./artifact.js";
 export { mapTree } from "./mapper.js";
 export * from "./model.js";
+export * from "./typed.js";
 
 /** Parse an AsciiUnits unit expression to the typed model; null on reject. */
 export async function parse(

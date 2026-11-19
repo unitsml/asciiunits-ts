@@ -22,9 +22,27 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm test
+        env:
+          CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml
       - run: npm run replay
         env:
           CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml
       - run: npm run smoke:package
         env:
           CORPUS_DIR: ${{ github.workspace }}/asciiunits-testsuite/corpora/unitsml
+  generated-models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: lutaml/lutaml-ts
+          ref: 1242c7b6314dcadc42e3453e85c9f2fc879cd7ef
+          path: .build/lutaml-ts-source
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm ci --ignore-scripts
+      - run: node scripts/generate-models.mjs .build/lutaml-ts-source
+      - run: git diff --exit-code -- src/generated src/upstream model/codegen-provenance.json

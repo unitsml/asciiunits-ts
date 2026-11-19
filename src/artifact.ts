@@ -10,6 +10,7 @@ import { fileURLToPath } from "node:url";
 import {
   ArtifactChecksumError,
   bindParser,
+  type AsciiUnitsParser,
   type AsciiUnitsTree,
 } from "./core.js";
 
@@ -52,6 +53,9 @@ const parser = bindParser(runtime);
 /** The raw parsanol-shape capture tree, or null when the input is rejected. */
 export const parseShape: (input: string) => Promise<AsciiUnitsTree | null> =
   parser.parseShape;
+
+/** Parse to the generated LutaML Document; null when the input is rejected. */
+export const parseModel: AsciiUnitsParser["parseModel"] = parser.parseModel;
 
 /** Embedded artifact tests; empty list means green. */
 export const artifactTestFailures: () => Promise<string[]> =
