@@ -77,26 +77,26 @@ test("fenced and number equality", () => {
   assert.ok(new Fenced("(", new Number("2"), ")").equals(new Fenced("(", new Number("2"), ")")));
 });
 
-// The vendored artifact is a parsanol `edition 2` grammar: its raw trees
-// name the bare fences, hyphen suffix arms and the zero-width end_guard.
-// The model layer must not see them (asciiunits 7b7024c; unitsml-ruby
-// strips them in its normalize pass).
+// The vendored artifact is a parsanol `edition 2` grammar compiled by
+// parsanol 1.5.8: its raw trees still name the hyphen suffix arms, but no
+// longer emit the unnamed fence and end_guard refs that 1.3.113 did
+// (asciiunits-testsuite generation 3a5d423e). The model layer sees none of
+// them (unitsml-ruby strips them in its normalize pass).
 test("edition-2 structural names reach the raw tree, never the model", async () => {
   const has = (t: unknown, k: string): boolean =>
     JSON.stringify(t).includes(JSON.stringify(k) + ":");
-  for (const [input, names] of [
-    ["m", ["end_guard"]],
-    ["mW*cm^(-2)", ["lparen", "rparen"]],
-    ["k-", ["hyphen"]],
+  for (const [input, present, absent] of [
+    ["m", [], ["end_guard"]],
+    ["mW*cm^(-2)", [], ["lparen", "rparen"]],
+    ["k-", ["hyphen"], []],
   ] as const) {
     const raw = await parseShape(input);
     assert.notEqual(raw, null, input);
     const model = await parse(input);
     assert.notEqual(model, null, input);
-    for (const name of names) {
-      assert.ok(has(raw, name), `${input}: raw tree carries ${name}`);
-      assert.ok(!has(model, name), `${input}: model drops ${name}`);
-    }
+    for (const name of present) assert.ok(has(raw, name), `${input}: raw tree carries ${name}`);
+    for (const name of absent) assert.ok(!has(raw, name), `${input}: raw tree omits ${name}`);
+    for (const name of [...present, ...absent]) assert.ok(!has(model, name), `${input}: model drops ${name}`);
   }
   assert.ok((await parse("m")) instanceof Unit);
 });
