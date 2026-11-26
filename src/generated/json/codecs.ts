@@ -12,7 +12,7 @@ export function decodeAsciiunitsModelDocument(v: unknown): m.AsciiunitsModelDocu
 
 export function encodeAsciiunitsModelDocument(x: m.AsciiunitsModelDocument): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "expression", x.expression, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
+  w.render(out, "expression", x.expression, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
   return out;
 }
 
@@ -43,23 +43,23 @@ export function decodeAsciiunitsModelExpression(v: unknown): m.AsciiunitsModelEx
 
 export function encodeAsciiunitsModelExpression(x: m.AsciiunitsModelExpression): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "close_paren", x.close_paren, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "dimension", x.dimension, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "first_int_exp_set", x.first_int_exp_set, encodeAsciiunitsModelFirstIntExpSet, "omit", "omit", "scalar");
-  w.render(out, "first_set", x.first_set, encodeAsciiunitsModelFirstSet, "omit", "omit", "scalar");
-  w.render(out, "hyphen", x.hyphen, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "implicit_extended", x.implicit_extended, encodeAsciiunitsModelImplicitExtended, "omit", "omit", "scalar");
-  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "integer", x.integer, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "open_paren", x.open_paren, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "power_numerator", x.power_numerator, encodeAsciiunitsModelPowerNumerator, "omit", "omit", "scalar");
-  w.render(out, "prefix", x.prefix, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "second_int_exp_set", x.second_int_exp_set, encodeAsciiunitsModelSecondIntExpSet, "omit", "omit", "scalar");
-  w.render(out, "second_set", x.second_set, encodeAsciiunitsModelSecondSet, "omit", "omit", "scalar");
-  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "sqrt", x.sqrt, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "unit", x.unit, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
+  w.render(out, "close_paren", x.close_paren, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "dimension", x.dimension, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "first_int_exp_set", x.first_int_exp_set, encodeAsciiunitsModelFirstIntExpSet, "omit", "omit", "hash");
+  w.render(out, "first_set", x.first_set, encodeAsciiunitsModelFirstSet, "omit", "omit", "hash");
+  w.render(out, "hyphen", x.hyphen, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "implicit_extended", x.implicit_extended, encodeAsciiunitsModelImplicitExtended, "omit", "omit", "hash");
+  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "integer", x.integer, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "open_paren", x.open_paren, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "power_numerator", x.power_numerator, encodeAsciiunitsModelPowerNumerator, "omit", "omit", "hash");
+  w.render(out, "prefix", x.prefix, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "second_int_exp_set", x.second_int_exp_set, encodeAsciiunitsModelSecondIntExpSet, "omit", "omit", "hash");
+  w.render(out, "second_set", x.second_set, encodeAsciiunitsModelSecondSet, "omit", "omit", "hash");
+  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "sqrt", x.sqrt, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "unit", x.unit, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
   return out;
 }
 
@@ -76,9 +76,9 @@ export function decodeAsciiunitsModelFirstIntExpSet(v: unknown): m.AsciiunitsMod
 
 export function encodeAsciiunitsModelFirstIntExpSet(x: m.AsciiunitsModelFirstIntExpSet): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
+  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
   return out;
 }
 
@@ -99,13 +99,13 @@ export function decodeAsciiunitsModelFirstSet(v: unknown): m.AsciiunitsModelFirs
 
 export function encodeAsciiunitsModelFirstSet(x: m.AsciiunitsModelFirstSet): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "dimension", x.dimension, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "power_numerator", x.power_numerator, encodeAsciiunitsModelPowerNumerator, "omit", "omit", "scalar");
-  w.render(out, "prefix", x.prefix, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "sqrt", x.sqrt, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "unit", x.unit, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
+  w.render(out, "dimension", x.dimension, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "power_numerator", x.power_numerator, encodeAsciiunitsModelPowerNumerator, "omit", "omit", "hash");
+  w.render(out, "prefix", x.prefix, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "sqrt", x.sqrt, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "unit", x.unit, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
   return out;
 }
 
@@ -124,11 +124,11 @@ export function decodeAsciiunitsModelImplicitExtended(v: unknown): m.AsciiunitsM
 
 export function encodeAsciiunitsModelImplicitExtended(x: m.AsciiunitsModelImplicitExtended): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "first_int_exp_set", x.first_int_exp_set, encodeAsciiunitsModelFirstIntExpSet, "omit", "omit", "scalar");
-  w.render(out, "first_set", x.first_set, encodeAsciiunitsModelFirstSet, "omit", "omit", "scalar");
-  w.render(out, "second_int_exp_set", x.second_int_exp_set, encodeAsciiunitsModelSecondIntExpSet, "omit", "omit", "scalar");
-  w.render(out, "second_set", x.second_set, encodeAsciiunitsModelSecondSet, "omit", "omit", "scalar");
+  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "first_int_exp_set", x.first_int_exp_set, encodeAsciiunitsModelFirstIntExpSet, "omit", "omit", "hash");
+  w.render(out, "first_set", x.first_set, encodeAsciiunitsModelFirstSet, "omit", "omit", "hash");
+  w.render(out, "second_int_exp_set", x.second_int_exp_set, encodeAsciiunitsModelSecondIntExpSet, "omit", "omit", "hash");
+  w.render(out, "second_set", x.second_set, encodeAsciiunitsModelSecondSet, "omit", "omit", "hash");
   return out;
 }
 
@@ -144,8 +144,8 @@ export function decodeAsciiunitsModelPowerNumerator(v: unknown): m.AsciiunitsMod
 
 export function encodeAsciiunitsModelPowerNumerator(x: m.AsciiunitsModelPowerNumerator): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "integer", x.integer, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
+  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "integer", x.integer, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
   return out;
 }
 
@@ -162,9 +162,9 @@ export function decodeAsciiunitsModelSecondIntExpSet(v: unknown): m.AsciiunitsMo
 
 export function encodeAsciiunitsModelSecondIntExpSet(x: m.AsciiunitsModelSecondIntExpSet): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
+  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "int_exp", x.int_exp, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
   return out;
 }
 
@@ -185,13 +185,13 @@ export function decodeAsciiunitsModelSecondSet(v: unknown): m.AsciiunitsModelSec
 
 export function encodeAsciiunitsModelSecondSet(x: m.AsciiunitsModelSecondSet): w.Rec {
   const out: Record<string, unknown> = {};
-  w.render(out, "dimension", x.dimension, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "power_numerator", x.power_numerator, encodeAsciiunitsModelPowerNumerator, "omit", "omit", "scalar");
-  w.render(out, "prefix", x.prefix, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
-  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "sqrt", x.sqrt, encodeAsciiunitsModelExpression, "omit", "omit", "scalar");
-  w.render(out, "unit", x.unit, encodeAsciiunitsModelSlice, "omit", "omit", "scalar");
+  w.render(out, "dimension", x.dimension, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "extender", x.extender, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "power_numerator", x.power_numerator, encodeAsciiunitsModelPowerNumerator, "omit", "omit", "hash");
+  w.render(out, "prefix", x.prefix, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
+  w.render(out, "sequence", x.sequence, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "sqrt", x.sqrt, encodeAsciiunitsModelExpression, "omit", "omit", "hash");
+  w.render(out, "unit", x.unit, encodeAsciiunitsModelSlice, "omit", "omit", "hash");
   return out;
 }
 

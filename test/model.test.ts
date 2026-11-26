@@ -57,7 +57,7 @@ test("a bare unit is a typed Document with exact slice integers", async () => {
   );
 });
 
-// The lutaml-ts 1242c7b JSON reader ignores undeclared keys (asciiunits-rs
+// The lutaml-model-ts a91e37d JSON reader ignores undeclared keys (asciiunits-rs
 // refuses them); exactness is what both readers enforce.
 test("a slice integer sent as a JSON number is a codec error", () => {
   const tree = { unit: { value: "m", offset: 0, length: 1, line: 1, column: 1 } };
